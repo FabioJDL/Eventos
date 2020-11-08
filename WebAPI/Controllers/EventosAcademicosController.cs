@@ -36,7 +36,14 @@ namespace Eventos.WebAPI.Controllers
         [Route("[action]")]
         public async Task<ActionResult<IEnumerable<EventoAcademico>>> GetEventosAcademicosByTitulo(string titulo)
         {
-            return await _context.EventosAcademicos.Where(evento => evento.Titulo == titulo).ToListAsync();
+            var eventos = await _context.EventosAcademicos.Where(evento => evento.Titulo == titulo).ToListAsync();
+
+            if (eventos.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return eventos;
         }
 
 
@@ -69,7 +76,14 @@ namespace Eventos.WebAPI.Controllers
         [Route("InscricoesEventosAcademicos/[action]")]
         public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicosByUsuarioCpf(string cpf)
         {
-            return await _context.InscricoesEventosAcademicos.Where(inscricao => inscricao.UsuarioCPF == cpf).ToListAsync();
+            var inscricoes = await _context.InscricoesEventosAcademicos.Where(i => i.UsuarioCPF == cpf).ToListAsync();
+
+            if (inscricoes.Count() == 0)
+            {
+                return NotFound();
+            }
+
+            return inscricoes;
         }
 
 
@@ -78,7 +92,15 @@ namespace Eventos.WebAPI.Controllers
         [Route("InscricoesEventosAcademicos/[action]")]
         public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicosByEventoId(int id)
         {
-            return await _context.InscricoesEventosAcademicos.Where(inscricao => inscricao.EventoAcademicoId == id).ToListAsync();
+            var inscricoes = await _context.InscricoesEventosAcademicos.Where(i => i.EventoAcademicoId == id).ToListAsync();
+
+            if (inscricoes.Count() == 0)
+            {
+                return NotFound();
+            }
+
+            return inscricoes;
+
         }
 
 
