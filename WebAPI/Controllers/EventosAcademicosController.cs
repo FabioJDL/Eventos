@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Eventos.WebAPI.DataAccessLayer;
 using Eventos.WebAPI.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Eventos.WebAPI.Controllers
 {
@@ -21,26 +22,36 @@ namespace Eventos.WebAPI.Controllers
             _context = context;
         }
 
+
         // GET: api/EventosAcademicos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventoAcademico>>> GetEventosAcademicos()
-        {
+        {                                                  
             return await _context.EventosAcademicos.ToListAsync();
         }
 
+
         //GET: api/InscricoesEventosAcademicos
         [HttpGet]
-        [Route("[action]")]
+        [Route("InscricoesEventosAcademicos/[action]")]
         public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicos()
         {
             return await _context.InscricoesEventosAcademicos.ToListAsync();
         }
 
 
+        //GET: api/GetEventosAcademicosByTitulo
+        [HttpGet]
+        [Route("InscricoesEventosAcademicos/[action]")]
+        public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicosUsuarioCpf(string cpf)
+        {
+            return await _context.InscricoesEventosAcademicos.Where(inscricao => inscricao.UsuarioCPF == cpf).ToListAsync();
+        }
+
         // GET: api/EventosAcademicos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<EventoAcademico>> GetEventoAcademico(int id)
-        {
+        {   
             var eventoAcademico = await _context.EventosAcademicos.FindAsync(id);
 
             if (eventoAcademico == null)
@@ -115,5 +126,16 @@ namespace Eventos.WebAPI.Controllers
         {
             return _context.EventosAcademicos.Any(e => e.Id == id);
         }
+
+
+
+
+
+
+
+
+
+
+        
     }
 }

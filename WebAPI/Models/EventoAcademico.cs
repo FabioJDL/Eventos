@@ -36,6 +36,5 @@ namespace Eventos.WebAPI.Models
 
         [Required]
         public int Capacidade { get; set; }
-
     }
 }
