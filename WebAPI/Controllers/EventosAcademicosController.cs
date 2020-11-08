@@ -31,7 +31,16 @@ namespace Eventos.WebAPI.Controllers
         }
 
 
-        //GET: api/InscricoesEventosAcademicos
+        //GET: api/EventosAcademicos/GetEventosAcademicosByTitulo
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<ActionResult<IEnumerable<EventoAcademico>>> GetEventosAcademicosByTitulo(string titulo)
+        {
+            return await _context.EventosAcademicos.Where(evento => evento.Titulo == titulo).ToListAsync();
+        }
+
+
+        //GET: api/EventosAcademicos/InscricoesEventosAcademicos/GetInscricoesEventosAcademicos
         [HttpGet]
         [Route("InscricoesEventosAcademicos/[action]")]
         public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicos()
@@ -40,13 +49,14 @@ namespace Eventos.WebAPI.Controllers
         }
 
 
-        //GET: api/GetEventosAcademicosByTitulo
+        // GET: api/EventosAcademicos/InscricoesEventosAcademicos/GetInscricoesEventosAcademicosUsuarioCpf
         [HttpGet]
         [Route("InscricoesEventosAcademicos/[action]")]
-        public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicosUsuarioCpf(string cpf)
+        public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicosByUsuarioCpf(string cpf)
         {
             return await _context.InscricoesEventosAcademicos.Where(inscricao => inscricao.UsuarioCPF == cpf).ToListAsync();
         }
+
 
         // GET: api/EventosAcademicos/5
         [HttpGet("{id}")]
@@ -61,6 +71,7 @@ namespace Eventos.WebAPI.Controllers
 
             return eventoAcademico;
         }
+
 
         // PUT: api/EventosAcademicos/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -94,6 +105,7 @@ namespace Eventos.WebAPI.Controllers
             return NoContent();
         }
 
+
         // POST: api/EventosAcademicos
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -105,6 +117,7 @@ namespace Eventos.WebAPI.Controllers
 
             return CreatedAtAction("GetEventoAcademico", new { id = eventoAcademico.Id }, eventoAcademico);
         }
+
 
         // DELETE: api/EventosAcademicos/5
         [HttpDelete("{id}")]
@@ -121,6 +134,7 @@ namespace Eventos.WebAPI.Controllers
 
             return eventoAcademico;
         }
+
 
         private bool EventoAcademicoExists(int id)
         {
