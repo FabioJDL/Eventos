@@ -28,6 +28,23 @@ namespace Eventos.WebAPI.Controllers
             return await _context.Usuarios.ToListAsync();
         }
 
+
+        //GET: api/Usuarios/GetUsuariosByNome
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuariosByNome(string nome)
+        {
+            var usuarios = await _context.Usuarios.Where(usuario => usuario.Nome == nome).ToListAsync();
+
+            if (usuarios.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return usuarios;
+        }
+
+
         // GET: api/Usuarios/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Usuario>> GetUsuario(string id)
