@@ -189,6 +189,9 @@ namespace Eventos.WebAPI.Controllers
         }
 
 
+
+
+
         private bool EventoAcademicoExists(int id)
         {
             return _context.EventosAcademicos.Any(e => e.Id == id);
