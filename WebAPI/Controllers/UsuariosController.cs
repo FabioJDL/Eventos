@@ -120,7 +120,6 @@ namespace Eventos.WebAPI.Controllers
         }
 
         
-
         // DELETE: api/Usuarios/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Usuario>> DeleteUsuario(string id)
