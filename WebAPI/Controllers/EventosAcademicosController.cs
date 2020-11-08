@@ -40,28 +40,10 @@ namespace Eventos.WebAPI.Controllers
         }
 
 
-        //GET: api/EventosAcademicos/InscricoesEventosAcademicos/GetInscricoesEventosAcademicos
-        [HttpGet]
-        [Route("InscricoesEventosAcademicos/[action]")]
-        public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicos()
-        {
-            return await _context.InscricoesEventosAcademicos.ToListAsync();
-        }
-
-
-        // GET: api/EventosAcademicos/InscricoesEventosAcademicos/GetInscricoesEventosAcademicosUsuarioCpf
-        [HttpGet]
-        [Route("InscricoesEventosAcademicos/[action]")]
-        public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicosByUsuarioCpf(string cpf)
-        {
-            return await _context.InscricoesEventosAcademicos.Where(inscricao => inscricao.UsuarioCPF == cpf).ToListAsync();
-        }
-
-
         // GET: api/EventosAcademicos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<EventoAcademico>> GetEventoAcademico(int id)
-        {   
+        {
             var eventoAcademico = await _context.EventosAcademicos.FindAsync(id);
 
             if (eventoAcademico == null)
@@ -71,6 +53,34 @@ namespace Eventos.WebAPI.Controllers
 
             return eventoAcademico;
         }
+
+
+        //GET: api/EventosAcademicos/InscricoesEventosAcademicos/GetInscricoesEventosAcademicos
+        [HttpGet]
+        [Route("InscricoesEventosAcademicos/[action]")]
+        public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicos()
+        {
+            return await _context.InscricoesEventosAcademicos.ToListAsync();
+        }
+
+
+        // GET: api/EventosAcademicos/InscricoesEventosAcademicos/GetInscricoesEventosAcademicosByUsuarioCpf
+        [HttpGet]
+        [Route("InscricoesEventosAcademicos/[action]")]
+        public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicosByUsuarioCpf(string cpf)
+        {
+            return await _context.InscricoesEventosAcademicos.Where(inscricao => inscricao.UsuarioCPF == cpf).ToListAsync();
+        }
+
+
+        // GET: api/EventosAcademicos/InscricoesEventosAcademicos/GetInscricoesEventosAcademicosByEventoId
+        [HttpGet]
+        [Route("InscricoesEventosAcademicos/[action]")]
+        public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicosByEventoId(int id)
+        {
+            return await _context.InscricoesEventosAcademicos.Where(inscricao => inscricao.EventoAcademicoId == id).ToListAsync();
+        }
+
 
 
         // PUT: api/EventosAcademicos/5
