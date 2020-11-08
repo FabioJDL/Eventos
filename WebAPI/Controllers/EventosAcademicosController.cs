@@ -96,15 +96,24 @@ namespace Eventos.WebAPI.Controllers
         }
 
 
+        // POST: api/EventosAcademicos/InscricoesEventosAcademicos/PostInscricaoEventoAcademico
         [HttpPost]
         [Route("InscricoesEventosAcademicos/[action]")]
         public async Task<ActionResult<InscricaoEventoAcademico>> PostInscricaoEventoAcademico(InscricaoEventoAcademico inscricao)
         {
-            _context.InscricoesEventosAcademicos.Add(inscricao);
+            //Verifica se tem vaga para se inscrever no evento, relacionando o número de inscritos no evento com sua Capacidade
+            if (_context.InscricoesEventosAcademicos.Where(i => i.EventoAcademicoId == inscricao.EventoAcademicoId).Count()
+               < _context.EventosAcademicos.Find(inscricao.EventoAcademicoId).Capacidade)
 
-            await _context.SaveChangesAsync();
+            {
+                _context.InscricoesEventosAcademicos.Add(inscricao);
 
-            return CreatedAtAction("GetInscricoesEventosAcademicos", new { id = inscricao.Id }, inscricao);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetInscricoesEventosAcademicos", new { id = inscricao.Id }, inscricao);
+            }
+
+            return BadRequest();
         }
 
 
@@ -139,6 +148,7 @@ namespace Eventos.WebAPI.Controllers
 
             return NoContent();
         }
+
 
         //PUT: api/EventosAcademicos/InscricoesEventosAcademicos/PutInscricaoEventoAcademico
         [HttpPut]
