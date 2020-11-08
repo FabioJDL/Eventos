@@ -140,6 +140,37 @@ namespace Eventos.WebAPI.Controllers
             return NoContent();
         }
 
+        //PUT: api/EventosAcademicos/InscricoesEventosAcademicos/PutInscricaoEventoAcademico
+        [HttpPut]
+        [Route("InscricoesEventosAcademicos/[action]")]
+        public async Task<IActionResult> PutInscricoesEventoAcademico(int id, InscricaoEventoAcademico inscricao)
+        {
+            if (id != inscricao.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(inscricao).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!InscricaoEventoAcademicoExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
 
         // DELETE: api/EventosAcademicos/5
         [HttpDelete("{id}")]
@@ -164,14 +195,11 @@ namespace Eventos.WebAPI.Controllers
         }
 
 
+        private bool InscricaoEventoAcademicoExists(int id)
+        {
+            return _context.InscricoesEventosAcademicos.Any(i => i.Id == id);
+        }
 
 
-
-
-
-
-
-
-        
     }
 }
