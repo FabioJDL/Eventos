@@ -32,6 +32,10 @@ namespace Eventos.WebAPI
                 options.UseSqlite(Configuration.GetConnectionString("cs"))
             );
 
+            services.AddDbContext<UsuariosDbContext>(options =>
+              options.UseSqlite(Configuration.GetConnectionString("cs"))
+            );
+
             services.AddControllers();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
