@@ -31,7 +31,7 @@ namespace Eventos.WebAPI
             services.AddDbContext<EventosAcademicosDbContext> ( options =>
                 options.UseSqlite(Configuration.GetConnectionString("cs"))
             );
-            
+
             services.AddControllers();
 
             // Register the Swagger generator, defining 1 or more Swagger documents

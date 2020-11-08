@@ -16,9 +16,8 @@ namespace Eventos.WebAPI.DataAccessLayer
         public DbSet<InscricaoEventoAcademico> InscricoesEventosAcademicos { get; set; }
 
 
-        public EventosAcademicosDbContext() : base()
+        public EventosAcademicosDbContext(DbContextOptions<EventosAcademicosDbContext> options) : base(options)
         {
-
         }
     }
 }
