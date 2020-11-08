@@ -28,6 +28,15 @@ namespace Eventos.WebAPI.Controllers
             return await _context.EventosAcademicos.ToListAsync();
         }
 
+        //GET: api/InscricoesEventosAcademicos
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<ActionResult<IEnumerable<InscricaoEventoAcademico>>> GetInscricoesEventosAcademicos()
+        {
+            return await _context.InscricoesEventosAcademicos.ToListAsync();
+        }
+
+
         // GET: api/EventosAcademicos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<EventoAcademico>> GetEventoAcademico(int id)
