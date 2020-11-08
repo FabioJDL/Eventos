@@ -189,7 +189,22 @@ namespace Eventos.WebAPI.Controllers
         }
 
 
+        // DELETE: api/EventosAcademicos/InscricoesEventosAcademicos/DeleteInscricaoEventoAcademico
+        [HttpDelete]
+        [Route("InscricoesEventosAcademicos/[action]")]
+        public async Task<ActionResult<InscricaoEventoAcademico>> DeleteInscricaoEventoAcademico(int id)
+        {
+            var inscricaoEventoAcademico = await _context.InscricoesEventosAcademicos.FindAsync(id);
+            if (inscricaoEventoAcademico == null)
+            {
+                return NotFound();
+            }
 
+            _context.InscricoesEventosAcademicos.Remove(inscricaoEventoAcademico);
+            await _context.SaveChangesAsync();
+
+            return inscricaoEventoAcademico;
+        }
 
 
         private bool EventoAcademicoExists(int id)
