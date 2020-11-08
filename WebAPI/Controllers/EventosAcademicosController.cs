@@ -82,6 +82,19 @@ namespace Eventos.WebAPI.Controllers
         }
 
 
+        // POST: api/EventosAcademicos
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        public async Task<ActionResult<EventoAcademico>> PostEventoAcademico(EventoAcademico eventoAcademico)
+        {
+            _context.EventosAcademicos.Add(eventoAcademico);
+
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetEventoAcademico", new { id = eventoAcademico.Id }, eventoAcademico);
+        }
+
 
         // PUT: api/EventosAcademicos/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -113,19 +126,6 @@ namespace Eventos.WebAPI.Controllers
             }
 
             return NoContent();
-        }
-
-
-        // POST: api/EventosAcademicos
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<EventoAcademico>> PostEventoAcademico(EventoAcademico eventoAcademico)
-        {
-            _context.EventosAcademicos.Add(eventoAcademico);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEventoAcademico", new { id = eventoAcademico.Id }, eventoAcademico);
         }
 
 
