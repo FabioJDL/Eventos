@@ -96,6 +96,18 @@ namespace Eventos.WebAPI.Controllers
         }
 
 
+        [HttpPost]
+        [Route("InscricoesEventosAcademicos/[action]")]
+        public async Task<ActionResult<InscricaoEventoAcademico>> PostInscricaoEventoAcademico(InscricaoEventoAcademico inscricao)
+        {
+            _context.InscricoesEventosAcademicos.Add(inscricao);
+
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetInscricoesEventosAcademicos", new { id = inscricao.Id }, inscricao);
+        }
+
+
         // PUT: api/EventosAcademicos/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
