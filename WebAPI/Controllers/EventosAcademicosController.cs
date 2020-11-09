@@ -103,6 +103,18 @@ namespace Eventos.WebAPI.Controllers
 
         }
 
+        // Get: api/EventosAcademicos/GerarCertificado
+        [HttpGet]
+        [Route("[action]")]
+        public string GerarCertificado(int eventoId, string usuarioCpf)
+        {
+            // PROGRAMAÇÃO ORIENTADA A GAMBIARRA!!!
+            if (_context.InscricoesEventosAcademicos.Where(i => i.EventoAcademicoId == eventoId).Where(i => i.UsuarioCPF == usuarioCpf).Where(i => i.ListaDePresenca == true).Count() != 0)
+                return "imprimindo certificado...";
+            
+            return "Certificado não encontrado!!!";
+        }
+
 
         // POST: api/EventosAcademicos
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
