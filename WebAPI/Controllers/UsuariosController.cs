@@ -140,5 +140,7 @@ namespace Eventos.WebAPI.Controllers
         {
             return _context.Usuarios.Any(e => e.CPF == id);
         }
+
+
     }
 }
