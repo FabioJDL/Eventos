@@ -23,7 +23,7 @@ namespace Eventos.WebAPI.Controllers
         }
 
 
-        // GET: api/EventosAcademicos
+        //Get: api/EventosAcademicos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventoAcademico>>> GetEventosAcademicos()
         {                                                  
